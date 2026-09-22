@@ -5,17 +5,28 @@ import { ClientRouter } from "astro:transitions";
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = "Benjamin Aamann — Portfolio",
   description =
     "Portfolio by Benjamin Aamann — Visual Design, Content Creation & Digital Marketing.",
+  image = "/images/profile/benjamin-hero.jpg",
 } = Astro.props;
+
+const siteUrl =
+  "https://benjamin-portfolio-2026-two.vercel.app";
+
+const canonicalUrl =
+  new URL(Astro.url.pathname, siteUrl).toString();
+
+const socialImage =
+  new URL(image, siteUrl).toString();
 ---
 
 <!doctype html>
-<html lang="da">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
 
@@ -24,11 +35,92 @@ const {
       content="width=device-width, initial-scale=1.0"
     />
 
-    <meta name="description" content={description} />
-
-    <meta name="theme-color" content="#0d0b0b" />
+    <!-- BASIC SEO -->
 
     <title>{title}</title>
+
+    <meta
+      name="description"
+      content={description}
+    />
+
+    <meta
+      name="theme-color"
+      content="#0d0b0b"
+    />
+
+    <link
+      rel="canonical"
+      href={canonicalUrl}
+    />
+
+
+    <!-- =====================================================
+         OPEN GRAPH — LINKEDIN / FACEBOOK
+    ====================================================== -->
+
+    <meta
+      property="og:type"
+      content="website"
+    />
+
+    <meta
+      property="og:title"
+      content={title}
+    />
+
+    <meta
+      property="og:description"
+      content={description}
+    />
+
+    <meta
+      property="og:url"
+      content={canonicalUrl}
+    />
+
+    <meta
+      property="og:image"
+      content={socialImage}
+    />
+
+    <meta
+      property="og:image:alt"
+      content="Benjamin Aamann — Multimedia Design Portfolio"
+    />
+
+    <meta
+      property="og:site_name"
+      content="Benjamin Aamann — Portfolio"
+    />
+
+
+    <!-- =====================================================
+         TWITTER / OTHER SOCIAL PREVIEWS
+    ====================================================== -->
+
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+
+    <meta
+      name="twitter:title"
+      content={title}
+    />
+
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+
+    <meta
+      name="twitter:image"
+      content={socialImage}
+    />
+
+
+    <!-- FAVICON -->
 
     <link
       rel="icon"
@@ -36,7 +128,6 @@ const {
       href="/favicon.svg"
     />
 
-    <!-- Giver os smooth side transitions -->
     <ClientRouter />
   </head>
 
