@@ -1,0 +1,395 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+  title="H.C. Andersen — Benjamin Aamann"
+  description="Motion graphics project by Benjamin Aamann."
+>
+  <main class="video-page">
+
+    <header class="video-nav">
+
+      <a href="/" class="logo">
+        BA.
+      </a>
+
+      <a href="/#work" class="back">
+        ← BACK TO WORK
+      </a>
+
+      <span class="number">
+        02 / 05
+      </span>
+
+    </header>
+
+
+    <section class="video-hero">
+
+      <div class="video-meta">
+
+        <span>
+          EK PROJECT
+        </span>
+
+        <span>
+          MOTION GRAPHICS · CONTENT · META ADS
+        </span>
+
+      </div>
+
+
+      <div class="video-title">
+
+        <h1>
+          H.C.<br />
+          ANDERSEN
+        </h1>
+
+        <p>
+          Et visuelt storytelling-koncept med fokus på
+          H.C. Andersen, København og motion graphics.
+        </p>
+
+      </div>
+
+
+      <div class="player">
+
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          poster="/images/projects/hc-andersen/cover.jpg"
+        >
+          <source
+            src="/videos/hc-andersen.mp4"
+            type="video/mp4"
+          />
+
+          Din browser understøtter ikke video.
+        </video>
+
+      </div>
+
+
+      <div class="video-footer">
+
+        <span>
+          MOTION DESIGN
+        </span>
+
+        <span>
+          AFTER EFFECTS · ILLUSTRATOR
+        </span>
+
+        <span>
+          2026
+        </span>
+
+      </div>
+
+    </section>
+
+  </main>
+</Layout>
+
+
+<style>
+
+  .video-page {
+    min-height: 100vh;
+    background: #0d0b0b;
+    color: #f1ece6;
+  }
+
+
+  .video-nav {
+    height: 82px;
+
+    padding:
+      0
+      var(--page-padding);
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
+
+    align-items: center;
+
+    border-bottom:
+      1px solid
+      rgba(241, 236, 230, 0.13);
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.62rem;
+
+    letter-spacing: 0.1em;
+  }
+
+
+  .logo {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+  }
+
+
+  .back {
+    opacity: 0.65;
+
+    transition:
+      opacity
+      0.3s ease;
+  }
+
+
+  .back:hover {
+    opacity: 1;
+  }
+
+
+  .number {
+    justify-self: end;
+
+    color:
+      rgba(241, 236, 230, 0.48);
+  }
+
+
+  .video-hero {
+    padding:
+      42px
+      var(--page-padding)
+      35px;
+  }
+
+
+  .video-meta {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(241, 236, 230, 0.52);
+  }
+
+
+  .video-title {
+    padding:
+      clamp(55px, 7vw, 105px)
+      0
+      clamp(45px, 6vw, 90px);
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.4fr)
+      minmax(260px, 0.6fr);
+
+    gap:
+      clamp(50px, 8vw, 130px);
+
+    align-items: end;
+  }
+
+
+  .video-title h1 {
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(5rem, 11vw, 12rem);
+
+    font-weight: 400;
+
+    line-height: 0.76;
+
+    letter-spacing: -0.075em;
+  }
+
+
+  .video-title p {
+    max-width: 390px;
+
+    margin: 0;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      0.85rem;
+
+    line-height: 1.7;
+
+    color:
+      rgba(241, 236, 230, 0.62);
+  }
+
+
+  .player {
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #000;
+  }
+
+
+  .player video {
+    display: block;
+
+    width: 100%;
+
+    max-height:
+      calc(100vh - 80px);
+
+    aspect-ratio:
+      16 / 9;
+
+    object-fit: contain;
+
+    background: #000;
+  }
+
+
+  .video-footer {
+    padding-top: 24px;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.55rem;
+
+    letter-spacing: 0.1em;
+
+    color:
+      rgba(241, 236, 230, 0.45);
+  }
+
+
+  .video-footer span:nth-child(2) {
+    justify-self: center;
+  }
+
+
+  .video-footer span:last-child {
+    justify-self: end;
+  }
+
+
+  @media (max-width: 800px) {
+
+    .video-nav {
+      height: 68px;
+
+      padding:
+        0
+        20px;
+    }
+
+
+    .back {
+      font-size: 0;
+
+    }
+
+
+    .back::after {
+      content: "← BACK";
+
+      font-size: 0.58rem;
+    }
+
+
+    .video-hero {
+      padding:
+        30px
+        20px;
+    }
+
+
+    .video-meta {
+      flex-direction: column;
+
+      gap: 8px;
+    }
+
+
+    .video-title {
+      grid-template-columns: 1fr;
+
+      gap: 30px;
+
+      padding:
+        55px
+        0
+        45px;
+    }
+
+
+    .video-title h1 {
+      font-size:
+        clamp(
+          4.2rem,
+          19vw,
+          7rem
+        );
+    }
+
+
+    .video-title p {
+      max-width: 330px;
+    }
+
+
+    .video-footer {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+
+    .video-footer span:nth-child(2) {
+      display: none;
+    }
+
+  }
+
+</style>

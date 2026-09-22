@@ -1,11 +1,3942 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import { projects } from "../data/projects";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Benjamin Aamann — Portfolio"
+  description="Portfolio by Benjamin Aamann — Visual Design, Content Creation & Digital Marketing."
+>
+  <main>
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <section class="hero">
+
+      <div class="hero__background"></div>
+      <div class="hero__image"></div>
+      <div class="hero__overlay"></div>
+
+      <header class="hero__top">
+
+        <a
+          href="/"
+          class="logo"
+          aria-label="Benjamin Aamann - Home"
+        >
+          BA.
+        </a>
+
+        <nav
+          class="nav"
+          aria-label="Main navigation"
+        >
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <span class="language">
+          EN
+        </span>
+
+      </header>
+
+
+      <div class="hero__content">
+
+        <div class="hero__disciplines">
+          <span>VISUAL DESIGN</span>
+          <span>CONTENT CREATION</span>
+          <span>DIGITAL MARKETING</span>
+        </div>
+
+
+        <div class="hero__main">
+
+          <h1>
+            BENJAMIN<br />
+            AAMANN
+          </h1>
+
+          <p class="hero__intro">
+            I create visual solutions that connect ideas with people.
+            As a Multimedia Design student, I work across visual design,
+            content creation and digital marketing.
+          </p>
+
+          <a
+            href="#work"
+            class="hero__link"
+          >
+            <span class="hero__arrow">
+              ↗
+            </span>
+
+            <span>
+              VIEW SELECTED WORK
+            </span>
+          </a>
+
+        </div>
+
+
+        <div class="hero__quote">
+          <span>Good people</span>
+          <span>create</span>
+          <span>great things.</span>
+        </div>
+
+      </div>
+
+
+      <div class="hero__footer">
+
+        <span>
+          COPENHAGEN, DENMARK
+        </span>
+
+        <span class="scroll">
+          SCROLL TO EXPLORE
+          <span class="scroll__line"></span>
+        </span>
+
+        <span class="hero__footer-right">
+          CREATIVE THINKER<br />
+          DOER
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         01 — SELECTED WORK
+    ====================================================== -->
+
+    <section
+      class="content-section work-intro"
+      id="work"
+    >
+
+      <div class="section-bar">
+
+        <span>
+          01
+        </span>
+
+        <span>
+          SELECTED WORK
+        </span>
+
+        <span>
+          05 PROJECTS
+        </span>
+
+      </div>
+
+
+      <div class="section-intro">
+
+        <h2>
+          SELECTED WORK
+        </h2>
+
+
+        <div class="section-intro__side">
+
+          <p>
+            A selection of projects across visual design,
+            content creation and digital marketing — from
+            academic work to independent ideas and my own startup.
+          </p>
+
+          <span class="section-note">
+            SCROLL TO EXPLORE ↓
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         DESKTOP PROJECT SLIDER
+    ====================================================== -->
+
+    <section class="project-scroll">
+
+      <div class="project-scroll__sticky">
+
+        <div class="project-header">
+
+          <span>
+            SELECTED WORK
+          </span>
+
+          <span class="project-header__number">
+            01 / 05
+          </span>
+
+        </div>
+
+
+        <div class="project-info">
+
+          <span class="project-info__number">
+            01
+          </span>
+
+          <span class="project-info__type">
+            OWN STARTUP
+          </span>
+
+          <h2 class="project-info__title">
+            WeCoModels
+          </h2>
+
+          <p class="project-info__disciplines">
+            Platform · Branding · UX/UI · Marketing
+          </p>
+
+          <span class="project-info__action">
+            VISIT WEBSITE ↗
+          </span>
+
+        </div>
+
+
+        <div class="project-rail">
+
+          <div class="project-track">
+
+            {
+              projects.map((project, index) => {
+
+                const content = (
+                  <>
+                    <img
+                      src={project.cover}
+                      alt={project.title}
+                      loading={index < 2 ? "eager" : "lazy"}
+                    />
+
+                    <div class="project-slide__caption">
+
+                      <span>
+                        {project.title}
+                      </span>
+
+                      <span>
+                        {
+                          project.destination === "coming-soon"
+                            ? "—"
+                            : "↗"
+                        }
+                      </span>
+
+                    </div>
+                  </>
+                );
+
+
+                if (project.destination === "coming-soon") {
+
+                  return (
+                    <article
+                      class="project-slide project-slide--disabled"
+                      data-index={index}
+                      data-number={project.number}
+                      data-title={project.title}
+                      data-type={project.type}
+                      data-disciplines={project.disciplines.join(" · ")}
+                      data-action="COMING SOON"
+                    >
+                      {content}
+                    </article>
+                  );
+
+                }
+
+
+                return (
+                  <a
+                    class="project-slide project-slide--clickable"
+                    href={project.href}
+                    target={
+                      project.destination === "external"
+                        ? "_blank"
+                        : undefined
+                    }
+                    rel={
+                      project.destination === "external"
+                        ? "noopener noreferrer"
+                        : undefined
+                    }
+                    data-index={index}
+                    data-number={project.number}
+                    data-title={project.title}
+                    data-type={project.type}
+                    data-disciplines={project.disciplines.join(" · ")}
+                    data-action={project.buttonText}
+                    aria-label={`${project.title} - ${project.buttonText}`}
+                  >
+                    {content}
+                  </a>
+                );
+
+              })
+            }
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="project-focus-frame"
+          aria-hidden="true"
+        ></div>
+
+
+        <div class="project-bottom">
+
+          <span class="project-bottom__current">
+            01
+          </span>
+
+          <div class="project-progress">
+            <span class="project-progress__fill"></span>
+          </div>
+
+          <span>
+            05
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           MOBILE PROJECT LIST
+      ====================================================== -->
+
+      <div class="mobile-projects">
+
+        <div class="mobile-projects__top">
+
+          <span>
+            SELECTED WORK
+          </span>
+
+          <span>
+            05 PROJECTS
+          </span>
+
+        </div>
+
+
+        {
+          projects.map((project, index) => {
+
+            const projectNumber =
+              String(index + 1).padStart(2, "0");
+
+
+            return (
+              <article class="mobile-project">
+
+                <div class="mobile-project__meta">
+
+                  <span>
+                    {projectNumber}
+                  </span>
+
+                  <span>
+                    {project.type}
+                  </span>
+
+                </div>
+
+
+                <h3>
+                  {project.title}
+                </h3>
+
+
+                <p class="mobile-project__disciplines">
+                  {project.disciplines.join(" · ")}
+                </p>
+
+
+                {
+                  project.destination === "coming-soon" ? (
+
+                    <span class="mobile-project__link mobile-project__link--disabled">
+                      COMING SOON
+                    </span>
+
+                  ) : (
+
+                    <a
+                      href={project.href}
+                      target={
+                        project.destination === "external"
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        project.destination === "external"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      class="mobile-project__link"
+                    >
+                      {project.buttonText.toUpperCase()} ↗
+                    </a>
+
+                  )
+                }
+
+
+                {
+                  project.destination === "coming-soon" ? (
+
+                    <div class="mobile-project__image mobile-project__image--disabled">
+
+                      <img
+                        src={project.cover}
+                        alt={project.title}
+                        loading="lazy"
+                      />
+
+                      <span>
+                        COMING SOON
+                      </span>
+
+                    </div>
+
+                  ) : (
+
+                    <a
+                      href={project.href}
+                      target={
+                        project.destination === "external"
+                          ? "_blank"
+                          : undefined
+                      }
+                      rel={
+                        project.destination === "external"
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                      class="mobile-project__image"
+                      aria-label={`${project.title} - ${project.buttonText}`}
+                    >
+
+                      <img
+                        src={project.cover}
+                        alt={project.title}
+                        loading="lazy"
+                      />
+
+                    </a>
+
+                  )
+                }
+
+              </article>
+            );
+
+          })
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         02 — ABOUT
+    ====================================================== -->
+
+    <section
+      class="content-section about"
+      id="about"
+    >
+
+      <div class="section-bar">
+
+        <span>
+          02
+        </span>
+
+        <span>
+          ABOUT
+        </span>
+
+        <span>
+          COPENHAGEN
+        </span>
+
+      </div>
+
+
+      <div class="section-intro">
+
+        <h2>
+          ABOUT ME
+        </h2>
+
+
+        <div class="section-intro__side">
+
+          <p>
+            I am a Multimedia Design student based in Copenhagen,
+            interested in visual communication, content creation
+            and digital experiences.
+          </p>
+
+          <span class="section-note">
+            MULTIMEDIA DESIGN · EK
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="about-story">
+
+        <span class="about-story__label">
+          MY APPROACH
+        </span>
+
+
+        <h3>
+          Creative ideas become stronger
+          when they have a clear direction.
+        </h3>
+
+
+        <div class="about-story__text">
+
+          <p>
+            I enjoy taking an idea from its early stages and turning
+            it into something visual, clear and useful. My main
+            interests are graphic design, branding, content creation,
+            motion graphics and digital marketing.
+          </p>
+
+          <p>
+            Through Multimedia Design at EK, I have worked with
+            visual identities, UX/UI, prototyping, user research,
+            social content, campaigns and motion. I enjoy being part
+            of the entire process — from understanding an audience
+            and developing a concept to designing the final output.
+          </p>
+
+          <p>
+            I am especially interested in projects where design and
+            culture meet. Music, advertising, film and fashion are
+            areas that inspire me because visual communication plays
+            such a large role in how a brand, artist or story is
+            experienced.
+          </p>
+
+          <p>
+            My way of working is both creative and structured. I like
+            exploring different visual directions, but I also care
+            about why a solution works, where it will be used and
+            who it needs to communicate with.
+          </p>
+
+        </div>
+
+
+        <div class="availability">
+
+          <span class="availability__dot"></span>
+
+          <div>
+
+            <span class="availability__label">
+              CURRENTLY
+            </span>
+
+            <p>
+              Looking for a 10-week internship in Spring 2027
+              within visual design, content creation or digital marketing.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="aligned-table">
+
+        <div class="aligned-table__header">
+
+          <span>
+            NO.
+          </span>
+
+          <span>
+            FOCUS AREA
+          </span>
+
+          <span>
+            TOOLS & METHODS
+          </span>
+
+        </div>
+
+
+        <div class="aligned-row">
+
+          <span>
+            01
+          </span>
+
+          <strong>
+            Visual Design
+          </strong>
+
+          <span>
+            Figma · Illustrator · Photoshop
+          </span>
+
+        </div>
+
+
+        <div class="aligned-row">
+
+          <span>
+            02
+          </span>
+
+          <strong>
+            Content Creation
+          </strong>
+
+          <span>
+            Concepts · Social Content · Campaigns
+          </span>
+
+        </div>
+
+
+        <div class="aligned-row">
+
+          <span>
+            03
+          </span>
+
+          <strong>
+            Motion
+          </strong>
+
+          <span>
+            After Effects · Video · Storytelling
+          </span>
+
+        </div>
+
+
+        <div class="aligned-row">
+
+          <span>
+            04
+          </span>
+
+          <strong>
+            UX / UI
+          </strong>
+
+          <span>
+            Research · Prototyping · Testing
+          </span>
+
+        </div>
+
+
+        <div class="aligned-row">
+
+          <span>
+            05
+          </span>
+
+          <strong>
+            Digital Marketing
+          </strong>
+
+          <span>
+            Meta Ads · Audiences · Content Strategy
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         03 — EXPERIENCE
+    ====================================================== -->
+
+    <section
+      class="content-section experience"
+      id="experience"
+    >
+
+      <div class="section-bar">
+
+        <span>
+          03
+        </span>
+
+        <span>
+          EXPERIENCE
+        </span>
+
+        <span>
+          2021 — NOW
+        </span>
+
+      </div>
+
+
+      <div class="section-intro section-intro--compact">
+
+        <h2>
+          EXPERIENCE
+        </h2>
+
+
+        <div class="section-intro__side">
+
+          <p>
+            Professional experience, education and independent work
+            have shaped the way I collaborate, communicate and
+            approach creative projects.
+          </p>
+
+          <span class="section-note">
+            WORK · EDUCATION · ENTREPRENEURSHIP
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="career-table">
+
+        <div class="career-table__header">
+
+          <span>
+            PERIOD
+          </span>
+
+          <span>
+            COMPANY
+          </span>
+
+          <span>
+            ROLE
+          </span>
+
+          <span>
+            FOCUS
+          </span>
+
+        </div>
+
+
+        <a
+          href="https://wecomodels.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="career-row"
+        >
+
+          <span>
+            2026 — NOW
+          </span>
+
+          <strong>
+            WeCoModels
+          </strong>
+
+          <span>
+            Co-founder
+          </span>
+
+          <span>
+            Product · UX/UI · Branding · Marketing
+          </span>
+
+        </a>
+
+
+        <div class="career-row">
+
+          <span>
+            2025
+          </span>
+
+          <strong>
+            Scandic Spectrum
+          </strong>
+
+          <span>
+            Receptionist
+          </span>
+
+          <span>
+            Communication · Service · Responsibility
+          </span>
+
+        </div>
+
+
+        <div class="career-row">
+
+          <span>
+            2023 — 2025
+          </span>
+
+          <strong>
+            SAS
+          </strong>
+
+          <span>
+            Ground Handling
+          </span>
+
+          <span>
+            Teamwork · Structure · High Pace
+          </span>
+
+        </div>
+
+
+        <div class="career-row">
+
+          <span>
+            2021 — 2022
+          </span>
+
+          <strong>
+            The Royal Life Guards
+          </strong>
+
+          <span>
+            Guardsman
+          </span>
+
+          <span>
+            Discipline · Structure · Collaboration
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="education-block">
+
+        <div class="education-block__label">
+          EDUCATION
+        </div>
+
+
+        <div class="career-row">
+
+          <span>
+            2025 — 2027
+          </span>
+
+          <strong>
+            EK
+          </strong>
+
+          <span>
+            Multimedia Design
+          </span>
+
+          <span>
+            Visual Design · UX/UI · Content · Digital Marketing
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         04 — CONTACT
+    ====================================================== -->
+
+    <section
+      class="content-section contact"
+      id="contact"
+    >
+
+      <div class="section-bar section-bar--dark">
+
+        <span>
+          04
+        </span>
+
+        <span>
+          CONTACT
+        </span>
+
+        <span>
+          SPRING 2027
+        </span>
+
+      </div>
+
+
+      <div class="section-intro section-intro--dark">
+
+        <h2>
+          LET'S TALK
+        </h2>
+
+
+        <div class="section-intro__side">
+
+          <p>
+            I am currently looking for a 10-week internship in
+            Spring 2027 within visual design, content creation
+            or digital marketing.
+          </p>
+
+          <span class="section-note">
+            OPEN TO CREATIVE OPPORTUNITIES
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="contact-list">
+
+        <a
+          href="mailto:benjamin.aamann@gmail.com"
+          class="contact-row"
+        >
+
+          <span class="contact-row__label">
+            EMAIL
+          </span>
+
+          <strong class="contact-row__value">
+            benjamin.aamann@gmail.com
+          </strong>
+
+          <span class="contact-row__action">
+            ↗
+          </span>
+
+        </a>
+
+
+        <div class="contact-row">
+
+          <span class="contact-row__label">
+            LOCATION
+          </span>
+
+          <strong class="contact-row__value">
+            Copenhagen, Denmark
+          </strong>
+
+          <span class="contact-row__action">
+            —
+          </span>
+
+        </div>
+
+
+        <a
+          href="/cv/benjamin-aamann-cv.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="contact-row"
+        >
+
+          <span class="contact-row__label">
+            CV
+          </span>
+
+          <strong class="contact-row__value">
+            View CV
+          </strong>
+
+          <span class="contact-row__action">
+            ↗
+          </span>
+
+        </a>
+
+      </div>
+
+
+      <div class="contact-closing">
+
+        <p>
+          AVAILABLE FOR INTERNSHIP · SPRING 2027
+        </p>
+
+        <h3>
+          LET'S CREATE<br />
+          SOMETHING GREAT.
+        </h3>
+
+      </div>
+
+
+      <footer class="site-footer">
+
+        <span>
+          BENJAMIN AAMANN
+        </span>
+
+        <a href="#">
+          BACK TO TOP ↑
+        </a>
+
+        <span>
+          PORTFOLIO · 2026
+        </span>
+
+      </footer>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+
+    const reducedMotion =
+      window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      ).matches;
+
+
+    /* HERO */
+
+    if (!reducedMotion) {
+
+      const heroTimeline =
+        gsap.timeline({
+          defaults: {
+            ease: "power3.out",
+          },
+        });
+
+
+      heroTimeline.from(
+        ".hero__image",
+        {
+          opacity: 0,
+          scale: 1.025,
+          duration: 1.4,
+        }
+      );
+
+
+      heroTimeline.from(
+        ".hero__top",
+        {
+          opacity: 0,
+          y: -14,
+          duration: 0.75,
+        },
+        "-=1"
+      );
+
+
+      heroTimeline.from(
+        ".hero__disciplines span",
+        {
+          opacity: 0,
+          x: -20,
+          duration: 0.6,
+          stagger: 0.07,
+        },
+        "-=0.55"
+      );
+
+
+      heroTimeline.from(
+        ".hero h1",
+        {
+          opacity: 0,
+          y: 85,
+          duration: 1.05,
+        },
+        "-=0.45"
+      );
+
+
+      heroTimeline.from(
+        ".hero__intro",
+        {
+          opacity: 0,
+          y: 18,
+          duration: 0.7,
+        },
+        "-=0.55"
+      );
+
+
+      heroTimeline.from(
+        ".hero__link",
+        {
+          opacity: 0,
+          y: 15,
+          duration: 0.65,
+        },
+        "-=0.42"
+      );
+
+
+      heroTimeline.from(
+        ".hero__quote",
+        {
+          opacity: 0,
+          x: 20,
+          rotate: -4,
+          duration: 0.8,
+        },
+        "-=0.55"
+      );
+
+
+      heroTimeline.from(
+        ".hero__footer",
+        {
+          opacity: 0,
+          duration: 0.6,
+        },
+        "-=0.3"
+      );
+
+    }
+
+
+    /* DESKTOP PROJECT SLIDER */
+
+    const section =
+      document.querySelector<HTMLElement>(
+        ".project-scroll"
+      );
+
+
+    const sticky =
+      document.querySelector<HTMLElement>(
+        ".project-scroll__sticky"
+      );
+
+
+    const track =
+      document.querySelector<HTMLElement>(
+        ".project-track"
+      );
+
+
+    const slides =
+      Array.from(
+        document.querySelectorAll<HTMLElement>(
+          ".project-slide"
+        )
+      );
+
+
+    const infoNumber =
+      document.querySelector<HTMLElement>(
+        ".project-info__number"
+      );
+
+
+    const infoType =
+      document.querySelector<HTMLElement>(
+        ".project-info__type"
+      );
+
+
+    const infoTitle =
+      document.querySelector<HTMLElement>(
+        ".project-info__title"
+      );
+
+
+    const infoDisciplines =
+      document.querySelector<HTMLElement>(
+        ".project-info__disciplines"
+      );
+
+
+    const infoAction =
+      document.querySelector<HTMLElement>(
+        ".project-info__action"
+      );
+
+
+    const headerNumber =
+      document.querySelector<HTMLElement>(
+        ".project-header__number"
+      );
+
+
+    const bottomCurrent =
+      document.querySelector<HTMLElement>(
+        ".project-bottom__current"
+      );
+
+
+    const progressFill =
+      document.querySelector<HTMLElement>(
+        ".project-progress__fill"
+      );
+
+
+    let activeIndex = -1;
+
+
+    const updateProjectInfo =
+      (index: number) => {
+
+        const slide =
+          slides[index];
+
+
+        if (
+          !slide ||
+          index === activeIndex
+        ) {
+          return;
+        }
+
+
+        activeIndex =
+          index;
+
+
+        slides.forEach(
+          (item, itemIndex) => {
+
+            const active =
+              itemIndex === index;
+
+
+            item.classList.toggle(
+              "is-active",
+              active
+            );
+
+
+            item.style.pointerEvents =
+              active
+                ? "auto"
+                : "none";
+
+          }
+        );
+
+
+        const number =
+          slide.dataset.number ?? "";
+
+
+        const type =
+          slide.dataset.type ?? "";
+
+
+        const title =
+          slide.dataset.title ?? "";
+
+
+        const disciplines =
+          slide.dataset.disciplines ?? "";
+
+
+        const action =
+          slide.dataset.action ?? "";
+
+
+        if (infoNumber) {
+          infoNumber.textContent =
+            number;
+        }
+
+
+        if (infoType) {
+          infoType.textContent =
+            type;
+        }
+
+
+        if (infoDisciplines) {
+          infoDisciplines.textContent =
+            disciplines;
+        }
+
+
+        if (infoAction) {
+
+          infoAction.textContent =
+            action === "COMING SOON"
+              ? "COMING SOON"
+              : `${action.toUpperCase()} ↗`;
+
+        }
+
+
+        if (headerNumber) {
+          headerNumber.textContent =
+            `${number} / 05`;
+        }
+
+
+        if (bottomCurrent) {
+          bottomCurrent.textContent =
+            number;
+        }
+
+
+        if (infoTitle) {
+
+          gsap.to(
+            infoTitle,
+            {
+
+              opacity: 0,
+
+              y: 5,
+
+              duration: 0.12,
+
+              onComplete: () => {
+
+                infoTitle.textContent =
+                  title;
+
+
+                gsap.fromTo(
+                  infoTitle,
+                  {
+                    opacity: 0,
+                    y: 5,
+                  },
+                  {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.25,
+                    ease: "power2.out",
+                  }
+                );
+
+              },
+
+            }
+          );
+
+        }
+
+      };
+
+
+    const updateSlides =
+      () => {
+
+        const viewportCenter =
+          window.innerWidth / 2;
+
+
+        slides.forEach(
+          (slide) => {
+
+            const rect =
+              slide.getBoundingClientRect();
+
+
+            const center =
+              rect.left +
+              rect.width / 2;
+
+
+            const distance =
+              Math.abs(
+                viewportCenter -
+                center
+              );
+
+
+            const range =
+              slide.offsetWidth *
+              1.2;
+
+
+            const focus =
+              Math.max(
+                0,
+                Math.min(
+                  1,
+                  1 -
+                  distance /
+                  range
+                )
+              );
+
+
+            slide.style.opacity =
+              String(
+                0.28 +
+                focus *
+                0.72
+              );
+
+          }
+        );
+
+      };
+
+
+    if (
+      section &&
+      sticky &&
+      track &&
+      slides.length &&
+      window.innerWidth > 800 &&
+      !reducedMotion
+    ) {
+
+
+      const getStartX =
+        () => {
+
+          const first =
+            slides[0];
+
+
+          const firstCenter =
+            first.offsetLeft +
+            first.offsetWidth / 2;
+
+
+          return (
+            window.innerWidth / 2 -
+            firstCenter
+          );
+
+        };
+
+
+      const getEndX =
+        () => {
+
+          const last =
+            slides[
+              slides.length - 1
+            ];
+
+
+          const lastCenter =
+            last.offsetLeft +
+            last.offsetWidth / 2;
+
+
+          return (
+            window.innerWidth / 2 -
+            lastCenter
+          );
+
+        };
+
+
+      gsap.fromTo(
+        track,
+
+        {
+          x: () =>
+            getStartX(),
+        },
+
+        {
+
+          x: () =>
+            getEndX(),
+
+          ease:
+            "none",
+
+          scrollTrigger: {
+
+            trigger:
+              section,
+
+            start:
+              "top top",
+
+            end: () =>
+              `+=${
+                window.innerHeight *
+                (
+                  slides.length -
+                  1
+                ) *
+                1.05
+              }`,
+
+            pin:
+              sticky,
+
+            scrub:
+              0.7,
+
+            anticipatePin:
+              1,
+
+            invalidateOnRefresh:
+              true,
+
+            snap: {
+
+              snapTo:
+                1 /
+                (
+                  slides.length -
+                  1
+                ),
+
+              duration: {
+                min: 0.2,
+                max: 0.42,
+              },
+
+              delay:
+                0.03,
+
+              ease:
+                "power2.inOut",
+
+            },
+
+
+            onUpdate:
+              (self) => {
+
+                const index =
+                  Math.round(
+                    self.progress *
+                    (
+                      slides.length -
+                      1
+                    )
+                  );
+
+
+                updateProjectInfo(
+                  index
+                );
+
+
+                updateSlides();
+
+
+                if (progressFill) {
+
+                  progressFill.style.transform =
+                    `scaleX(${self.progress})`;
+
+                }
+
+              },
+
+
+            onRefresh:
+              () => {
+
+                updateSlides();
+
+              },
+
+          },
+
+        }
+      );
+
+
+      updateProjectInfo(0);
+
+
+      requestAnimationFrame(
+        updateSlides
+      );
+
+    }
+
+
+    /* REVEALS */
+
+    if (!reducedMotion) {
+
+      const revealItems =
+        document.querySelectorAll(
+          ".section-intro, .about-story, .aligned-table, .career-table, .education-block, .contact-list, .contact-closing"
+        );
+
+
+      revealItems.forEach(
+        (element) => {
+
+          gsap.from(
+            element,
+            {
+
+              opacity: 0,
+
+              y: 24,
+
+              duration: 0.75,
+
+              ease: "power3.out",
+
+              scrollTrigger: {
+
+                trigger:
+                  element,
+
+                start:
+                  "top 90%",
+
+              },
+
+            }
+          );
+
+        }
+      );
+
+    }
+
+  </script>
+
 </Layout>
+
+
+<style>
+
+  /* =====================================================
+     SHARED GRID
+  ====================================================== */
+
+  .content-section {
+    padding:
+      34px
+      var(--page-padding)
+      clamp(90px, 9vw, 140px);
+  }
+
+
+  .section-bar {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
+
+    align-items: center;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+      1px solid
+      rgba(13, 11, 11, 0.15);
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.55rem;
+
+    letter-spacing: 0.12em;
+
+    color:
+      rgba(13, 11, 11, 0.46);
+  }
+
+
+  .section-bar span:nth-child(2) {
+    justify-self: center;
+  }
+
+
+  .section-bar span:last-child {
+    justify-self: end;
+  }
+
+
+  .section-bar--dark {
+    border-color:
+      rgba(241, 236, 230, 0.16);
+
+    color:
+      rgba(241, 236, 230, 0.48);
+  }
+
+
+  .section-intro {
+    min-height: 47vh;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(320px, 380px);
+
+    gap:
+      clamp(55px, 7vw, 110px);
+
+    align-items: center;
+  }
+
+
+  .section-intro--compact {
+    min-height: 34vh;
+  }
+
+
+  .section-intro h2 {
+    margin: 0;
+
+    white-space: nowrap;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      clamp(
+        4rem,
+        7vw,
+        7.2rem
+      );
+
+    font-weight: 800;
+
+    line-height: 0.86;
+
+    letter-spacing: -0.075em;
+  }
+
+
+  .section-intro__side {
+    width: 100%;
+
+    max-width: 380px;
+
+    justify-self: start;
+  }
+
+
+  .section-intro__side p {
+    margin: 0;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.88rem;
+
+    line-height: 1.68;
+  }
+
+
+  .section-note {
+    display: block;
+
+    margin-top: 20px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.51rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(13, 11, 11, 0.43);
+  }
+
+
+  .section-intro--dark
+  .section-note {
+    color:
+      rgba(241, 236, 230, 0.42);
+  }
+
+
+  /* =====================================================
+     HERO
+  ====================================================== */
+
+  .hero {
+    position: relative;
+
+    isolation: isolate;
+
+    min-height: 100svh;
+
+    overflow: hidden;
+
+    padding:
+      30px
+      var(--page-padding)
+      30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #0d0b0b;
+
+    color: #f1ece6;
+  }
+
+
+  .hero__background {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -6;
+
+    background:
+      radial-gradient(
+        circle at 68% 42%,
+        rgba(160, 91, 60, 0.1),
+        transparent 39%
+      ),
+      #0d0b0b;
+  }
+
+
+  .hero__image {
+    position: absolute;
+
+    top: 0;
+
+    right: 0;
+
+    bottom: 0;
+
+    width: 58vw;
+
+    background-image:
+      url("/images/profile/benjamin-hero.jpg");
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    background-position:
+      50%
+      12%;
+
+    filter:
+      saturate(0.72)
+      contrast(1.05)
+      brightness(0.84);
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.08) 5%,
+        rgba(0, 0, 0, 0.35) 12%,
+        rgba(0, 0, 0, 0.75) 23%,
+        black 34%,
+        black 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.08) 5%,
+        rgba(0, 0, 0, 0.35) 12%,
+        rgba(0, 0, 0, 0.75) 23%,
+        black 34%,
+        black 100%
+      );
+
+    z-index: -5;
+  }
+
+
+  .hero__overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -4;
+
+    pointer-events: none;
+
+    background:
+      linear-gradient(
+        90deg,
+        rgba(13, 11, 11, 0.98) 0%,
+        rgba(13, 11, 11, 0.92) 21%,
+        rgba(13, 11, 11, 0.5) 46%,
+        rgba(13, 11, 11, 0.12) 70%,
+        rgba(13, 11, 11, 0.24) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(13, 11, 11, 0.25) 0%,
+        rgba(13, 11, 11, 0.03) 38%,
+        rgba(13, 11, 11, 0.13) 65%,
+        rgba(13, 11, 11, 0.72) 100%
+      );
+  }
+
+
+  .hero__top {
+    position: relative;
+
+    z-index: 10;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
+
+    align-items: center;
+  }
+
+
+  .logo {
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 1.2rem;
+
+    font-weight: 800;
+
+    letter-spacing: -0.05em;
+  }
+
+
+  .nav {
+    display: flex;
+
+    gap: 30px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.72rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.09em;
+  }
+
+
+  .nav a {
+    position: relative;
+  }
+
+
+  .nav a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -6px;
+
+    width: 0;
+
+    height: 1px;
+
+    background: #b94d2e;
+
+    transition:
+      width
+      0.3s
+      ease;
+  }
+
+
+  .nav a:hover::after {
+    width: 100%;
+  }
+
+
+  .language {
+    justify-self: end;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.67rem;
+
+    letter-spacing: 0.1em;
+  }
+
+
+  .hero__content {
+    position: relative;
+
+    flex: 1;
+
+    display: grid;
+
+    grid-template-columns:
+      minmax(125px, 0.43fr)
+      minmax(550px, 1.75fr)
+      minmax(185px, 0.62fr);
+
+    column-gap:
+      clamp(28px, 3.4vw, 62px);
+
+    align-items: center;
+  }
+
+
+  .hero__disciplines {
+    display: flex;
+
+    flex-direction: column;
+
+    align-self: center;
+
+    transform:
+      translateY(-3vh);
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      clamp(0.63rem, 0.7vw, 0.76rem);
+
+    line-height: 1.75;
+
+    letter-spacing: 0.085em;
+
+    color:
+      rgba(241, 236, 230, 0.83);
+  }
+
+
+  .hero__main {
+    align-self: end;
+
+    padding-bottom: 8vh;
+
+    max-width: 850px;
+  }
+
+
+  .hero h1 {
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(4.6rem, 8.25vw, 9.3rem);
+
+    font-weight: 400;
+
+    line-height: 0.81;
+
+    letter-spacing: -0.072em;
+  }
+
+
+  .hero__intro {
+    width:
+      min(465px, 100%);
+
+    margin:
+      34px
+      0
+      0;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      clamp(0.77rem, 0.83vw, 0.9rem);
+
+    line-height: 1.65;
+
+    color:
+      rgba(241, 236, 230, 0.7);
+  }
+
+
+  .hero__link {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-top: 29px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.67rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+  }
+
+
+  .hero__arrow {
+    width: 44px;
+
+    height: 44px;
+
+    display: grid;
+
+    place-items: center;
+
+    border:
+      1px solid
+      rgba(241, 236, 230, 0.52);
+
+    border-radius: 50%;
+  }
+
+
+  .hero__quote {
+    align-self: center;
+
+    justify-self: end;
+
+    transform:
+      translateY(10vh)
+      rotate(-5deg);
+
+    width: 210px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(1.25rem, 1.75vw, 2rem);
+
+    font-style: italic;
+
+    line-height: 1.04;
+  }
+
+
+  .hero__footer {
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr
+      1fr;
+
+    align-items: end;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.56rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(241, 236, 230, 0.55);
+  }
+
+
+  .scroll {
+    justify-self: center;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+  }
+
+
+  .scroll__line {
+    width: 28px;
+
+    height: 1px;
+
+    background:
+      rgba(241, 236, 230, 0.48);
+  }
+
+
+  .hero__footer-right {
+    justify-self: end;
+
+    text-align: right;
+  }
+
+
+  /* =====================================================
+     WORK
+  ====================================================== */
+
+  .work-intro {
+    background: #f1ece6;
+
+    color: #0d0b0b;
+  }
+
+
+  /* =====================================================
+     PROJECTS — DESKTOP
+  ====================================================== */
+
+  .project-scroll {
+    position: relative;
+
+    background: #291213;
+  }
+
+
+  .project-scroll__sticky {
+    position: relative;
+
+    height: 100svh;
+
+    overflow: hidden;
+
+    background: #291213;
+
+    color: #f1ece6;
+  }
+
+
+  .project-header {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 28px;
+
+    left: var(--page-padding);
+
+    right: var(--page-padding);
+
+    display: flex;
+
+    justify-content: space-between;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size: 0.56rem;
+
+    letter-spacing: 0.13em;
+
+    color:
+      rgba(241, 236, 230, 0.5);
+  }
+
+
+  .project-info {
+    position: absolute;
+
+    z-index: 30;
+
+    top: 50%;
+
+    left: var(--page-padding);
+
+    width:
+      clamp(170px, 16vw, 250px);
+
+    transform:
+      translateY(-50%);
+  }
+
+
+  .project-info__number {
+    display: block;
+
+    margin-bottom: 30px;
+
+    font-size: 0.56rem;
+
+    color:
+      rgba(241, 236, 230, 0.4);
+  }
+
+
+  .project-info__type {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-size: 0.52rem;
+
+    letter-spacing: 0.12em;
+
+    color:
+      rgba(241, 236, 230, 0.48);
+  }
+
+
+  .project-info__title {
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(2rem, 2.9vw, 4rem);
+
+    font-weight: 400;
+
+    line-height: 0.94;
+  }
+
+
+  .project-info__disciplines {
+    margin:
+      17px
+      0
+      0;
+
+    max-width: 220px;
+
+    font-size: 0.58rem;
+
+    line-height: 1.55;
+
+    color:
+      rgba(241, 236, 230, 0.5);
+  }
+
+
+  .project-info__action {
+    display: inline-block;
+
+    margin-top: 34px;
+
+    padding-bottom: 5px;
+
+    border-bottom:
+      1px solid
+      rgba(241, 236, 230, 0.3);
+
+    font-size: 0.51rem;
+
+    letter-spacing: 0.12em;
+  }
+
+
+  .project-rail {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+  }
+
+
+  .project-track {
+    width: max-content;
+
+    display: flex;
+
+    align-items: center;
+
+    gap:
+      clamp(42px, 5vw, 90px);
+  }
+
+
+  .project-slide {
+    position: relative;
+
+    flex:
+      0
+      0
+      auto;
+
+    width:
+      clamp(560px, 58vw, 900px);
+
+    aspect-ratio:
+      1.75 / 1;
+
+    overflow: hidden;
+
+    display: block;
+
+    background: #1d0d0f;
+
+    color: #f1ece6;
+  }
+
+
+  .project-slide img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    background: #1d0d0f;
+  }
+
+
+  .project-slide__caption {
+    position: absolute;
+
+    left: 22px;
+
+    right: 22px;
+
+    bottom: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    opacity: 0;
+
+    font-size: 0.54rem;
+  }
+
+
+  .project-slide.is-active
+  .project-slide__caption {
+    opacity: 1;
+  }
+
+
+  .project-slide--disabled::after {
+    content: "COMING SOON";
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+      translate(-50%, -50%);
+
+    padding:
+      9px
+      14px;
+
+    border:
+      1px solid
+      rgba(255, 255, 255, 0.45);
+
+    border-radius: 999px;
+
+    background:
+      rgba(41, 18, 19, 0.65);
+
+    font-size: 0.51rem;
+  }
+
+
+  .project-focus-frame {
+    position: absolute;
+
+    z-index: 20;
+
+    top: 50%;
+
+    left: 50%;
+
+    width:
+      clamp(560px, 58vw, 900px);
+
+    aspect-ratio:
+      1.75 / 1;
+
+    transform:
+      translate(-50%, -50%);
+
+    pointer-events: none;
+
+    border:
+      1px solid
+      rgba(241, 236, 230, 0.62);
+  }
+
+
+  .project-bottom {
+    position: absolute;
+
+    z-index: 30;
+
+    left: var(--page-padding);
+
+    right: var(--page-padding);
+
+    bottom: 28px;
+
+    display: grid;
+
+    grid-template-columns:
+      auto
+      1fr
+      auto;
+
+    gap: 17px;
+
+    align-items: center;
+
+    font-size: 0.49rem;
+
+    color:
+      rgba(241, 236, 230, 0.4);
+  }
+
+
+  .project-progress {
+    height: 1px;
+
+    overflow: hidden;
+
+    background:
+      rgba(241, 236, 230, 0.14);
+  }
+
+
+  .project-progress__fill {
+    display: block;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: #b94d2e;
+
+    transform: scaleX(0);
+
+    transform-origin: left;
+  }
+
+
+  /* =====================================================
+     PROJECTS — MOBILE LIST
+  ====================================================== */
+
+  .mobile-projects {
+    display: none;
+  }
+
+
+  /* =====================================================
+     ABOUT
+  ====================================================== */
+
+  .about {
+    background: #f1ece6;
+
+    color: #0d0b0b;
+  }
+
+
+  .about-story {
+    width:
+      min(760px, 62vw);
+
+    padding:
+      5px
+      0
+      clamp(100px, 10vw, 150px);
+  }
+
+
+  .about-story__label {
+    display: block;
+
+    margin-bottom: 24px;
+
+    font-size: 0.51rem;
+
+    letter-spacing: 0.12em;
+
+    color:
+      rgba(13, 11, 11, 0.4);
+  }
+
+
+  .about-story h3 {
+    max-width: 720px;
+
+    margin: 0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        2.7rem,
+        4vw,
+        4.7rem
+      );
+
+    font-weight: 400;
+
+    line-height: 0.97;
+
+    letter-spacing: -0.05em;
+  }
+
+
+  .about-story__text {
+    margin-top:
+      clamp(38px, 4vw, 55px);
+
+    display: grid;
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap:
+      30px
+      clamp(36px, 4vw, 58px);
+  }
+
+
+  .about-story__text p {
+    margin: 0;
+
+    font-size: 0.83rem;
+
+    line-height: 1.74;
+
+    color:
+      rgba(13, 11, 11, 0.61);
+  }
+
+
+  .availability {
+    margin-top: 42px;
+
+    padding-top: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+      auto
+      1fr;
+
+    gap: 14px;
+
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.14);
+  }
+
+
+  .availability__dot {
+    width: 7px;
+
+    height: 7px;
+
+    margin-top: 5px;
+
+    border-radius: 50%;
+
+    background: #b94d2e;
+  }
+
+
+  .availability__label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 0.5rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(13, 11, 11, 0.43);
+  }
+
+
+  .availability p {
+    max-width: 560px;
+
+    margin: 0;
+
+    font-size: 0.82rem;
+
+    line-height: 1.65;
+
+    color:
+      rgba(13, 11, 11, 0.62);
+  }
+
+
+  /* =====================================================
+     ABOUT SKILLS
+  ====================================================== */
+
+  .aligned-table {
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.16);
+  }
+
+
+  .aligned-table__header,
+  .aligned-row {
+    display: grid;
+
+    grid-template-columns:
+      95px
+      minmax(320px, 1fr)
+      minmax(320px, 380px);
+
+    column-gap:
+      clamp(35px, 4vw, 65px);
+
+    align-items: center;
+
+    padding-left:
+      clamp(25px, 3vw, 48px);
+  }
+
+
+  .aligned-table__header {
+    min-height: 58px;
+
+    font-size: 0.5rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(13, 11, 11, 0.4);
+  }
+
+
+  .aligned-row {
+    min-height: 92px;
+
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.12);
+  }
+
+
+  .aligned-row > span:first-child {
+    font-size: 0.55rem;
+
+    color:
+      rgba(13, 11, 11, 0.38);
+  }
+
+
+  .aligned-row strong {
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        1.45rem,
+        1.9vw,
+        2.1rem
+      );
+
+    font-weight: 400;
+  }
+
+
+  .aligned-row > span:last-child {
+    font-size: 0.69rem;
+
+    line-height: 1.5;
+
+    color:
+      rgba(13, 11, 11, 0.5);
+  }
+
+
+  .aligned-table__header > *:nth-child(2),
+  .aligned-row > *:nth-child(2) {
+    transform:
+      translateX(
+        clamp(30px, 3vw, 48px)
+      );
+  }
+
+
+  /* =====================================================
+     EXPERIENCE
+  ====================================================== */
+
+  .experience {
+    background: #f1ece6;
+
+    color: #0d0b0b;
+
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.13);
+  }
+
+
+  .career-table {
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.16);
+  }
+
+
+  .career-table__header,
+  .career-row {
+    display: grid;
+
+    grid-template-columns:
+      120px
+      minmax(200px, 0.9fr)
+      minmax(220px, 0.9fr)
+      minmax(320px, 380px);
+
+    column-gap:
+      clamp(30px, 3vw, 48px);
+
+    align-items: center;
+
+    padding-left:
+      clamp(40px, 4.5vw, 72px);
+  }
+
+
+  .career-table__header {
+    min-height: 58px;
+
+    font-size: 0.5rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(13, 11, 11, 0.4);
+  }
+
+
+  .career-row {
+    min-height: 98px;
+
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.13);
+
+    color: #0d0b0b;
+  }
+
+
+  .career-row > span:first-child {
+    font-size: 0.67rem;
+
+    line-height: 1.5;
+
+    color:
+      rgba(13, 11, 11, 0.48);
+  }
+
+
+  .career-row strong {
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        1.3rem,
+        1.6vw,
+        1.8rem
+      );
+
+    font-weight: 400;
+  }
+
+
+  .career-row > span:nth-child(3) {
+    font-size: 0.82rem;
+
+    color: #0d0b0b;
+  }
+
+
+  .career-row > span:last-child {
+    font-size: 0.67rem;
+
+    line-height: 1.5;
+
+    color:
+      rgba(13, 11, 11, 0.48);
+  }
+
+
+  .career-table__header > *:nth-child(3),
+  .career-row > *:nth-child(3) {
+    transform:
+      translateX(
+        clamp(30px, 3vw, 48px)
+      );
+  }
+
+
+  .education-block {
+    margin-top: 80px;
+  }
+
+
+  .education-block__label {
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-left:
+      clamp(40px, 4.5vw, 72px);
+
+    border-top:
+      1px solid
+      rgba(13, 11, 11, 0.16);
+
+    font-size: 0.52rem;
+
+    letter-spacing: 0.11em;
+
+    color:
+      rgba(13, 11, 11, 0.42);
+  }
+
+
+  /* =====================================================
+     CONTACT
+  ====================================================== */
+
+  .contact {
+    min-height: 100svh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background:
+      #0d0b0b;
+
+    color:
+      #f1ece6;
+
+    padding-bottom: 32px;
+  }
+
+
+  .contact .section-intro {
+    min-height: 44vh;
+  }
+
+
+  .section-intro--dark
+  .section-intro__side p {
+    color:
+      rgba(241, 236, 230, 0.72);
+  }
+
+
+  .contact-list {
+    border-top:
+      1px solid
+      rgba(241, 236, 230, 0.16);
+  }
+
+
+  .contact-row {
+    min-height:
+      105px;
+
+    display: grid;
+
+    grid-template-columns:
+      180px
+      minmax(0, 1fr)
+      50px;
+
+    gap:
+      35px;
+
+    align-items: center;
+
+    border-bottom:
+      1px solid
+      rgba(241, 236, 230, 0.14);
+
+    color:
+      #f1ece6;
+
+    transition:
+      opacity
+      0.25s
+      ease;
+  }
+
+
+  a.contact-row:hover {
+    opacity: 0.58;
+  }
+
+
+  .contact-row__label {
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      0.52rem;
+
+    letter-spacing:
+      0.12em;
+
+    color:
+      rgba(241, 236, 230, 0.4);
+  }
+
+
+  .contact-row__value {
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        1.65rem,
+        2.6vw,
+        3rem
+      );
+
+    font-weight:
+      400;
+
+    line-height:
+      1;
+
+    letter-spacing:
+      -0.035em;
+  }
+
+
+  .contact-row__action {
+    justify-self:
+      end;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      0.75rem;
+
+    color:
+      rgba(241, 236, 230, 0.5);
+  }
+
+
+  .contact-closing {
+    padding:
+      clamp(95px, 10vw, 150px)
+      0
+      clamp(90px, 9vw, 135px);
+
+    border-bottom:
+      1px solid
+      rgba(241, 236, 230, 0.14);
+  }
+
+
+  .contact-closing p {
+    margin:
+      0
+      0
+      26px;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      0.52rem;
+
+    letter-spacing:
+      0.12em;
+
+    color:
+      rgba(241, 236, 230, 0.42);
+  }
+
+
+  .contact-closing h3 {
+    max-width:
+      1050px;
+
+    margin:
+      0;
+
+    font-family:
+      Georgia,
+      "Times New Roman",
+      serif;
+
+    font-size:
+      clamp(
+        4.2rem,
+        8vw,
+        9rem
+      );
+
+    font-weight:
+      400;
+
+    line-height:
+      0.83;
+
+    letter-spacing:
+      -0.07em;
+  }
+
+
+  .site-footer {
+    margin-top:
+      30px;
+
+    padding-top:
+      4px;
+
+    display:
+      grid;
+
+    grid-template-columns:
+      1fr
+      auto
+      1fr;
+
+    align-items:
+      center;
+
+    font-family:
+      Arial,
+      Helvetica,
+      sans-serif;
+
+    font-size:
+      0.5rem;
+
+    letter-spacing:
+      0.11em;
+
+    color:
+      rgba(241, 236, 230, 0.4);
+  }
+
+
+  .site-footer a {
+    justify-self:
+      center;
+
+    transition:
+      color
+      0.25s
+      ease;
+  }
+
+
+  .site-footer a:hover {
+    color:
+      #f1ece6;
+  }
+
+
+  .site-footer span:last-child {
+    justify-self:
+      end;
+  }
+
+
+  /* =====================================================
+     TABLET
+  ====================================================== */
+
+  @media (max-width: 1050px) {
+
+    .hero__image {
+      width: 68vw;
+    }
+
+
+    .hero__content {
+      grid-template-columns: 1fr;
+
+      align-content: end;
+    }
+
+
+    .hero__disciplines {
+      margin-top: 100px;
+
+      transform: none;
+    }
+
+
+    .hero__main {
+      align-self: auto;
+
+      padding-bottom: 0;
+    }
+
+
+    .hero__quote {
+      display: none;
+    }
+
+
+    .hero__footer {
+      margin-top: 50px;
+
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+
+    .scroll {
+      display: none;
+    }
+
+
+    .section-intro {
+      grid-template-columns:
+        1fr;
+
+      min-height: auto;
+
+      padding:
+        70px
+        0;
+
+      gap: 40px;
+    }
+
+
+    .section-intro--compact {
+      padding:
+        55px
+        0;
+    }
+
+
+    .section-intro__side {
+      max-width: 520px;
+    }
+
+
+    .about-story {
+      width:
+        min(760px, 85vw);
+    }
+
+
+    .aligned-table__header,
+    .aligned-row {
+      grid-template-columns:
+        80px
+        1fr
+        minmax(260px, 320px);
+
+      padding-left: 25px;
+    }
+
+
+    .career-table__header,
+    .career-row {
+      grid-template-columns:
+        105px
+        1fr
+        1fr
+        minmax(260px, 320px);
+
+      column-gap: 25px;
+
+      padding-left: 30px;
+    }
+
+
+    .education-block__label {
+      padding-left: 30px;
+    }
+
+
+    .contact-row {
+      grid-template-columns:
+        120px
+        1fr
+        40px;
+    }
+
+  }
+
+
+  /* =====================================================
+     MOBILE
+  ====================================================== */
+
+  @media (max-width: 800px) {
+
+    .content-section {
+      padding:
+        28px
+        20px
+        80px;
+    }
+
+
+    .section-bar {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+
+    .section-bar span:nth-child(2) {
+      display: none;
+    }
+
+
+    .section-bar span:last-child {
+      justify-self: end;
+    }
+
+
+    .section-intro {
+      grid-template-columns:
+        1fr;
+
+      min-height: auto;
+
+      padding:
+        58px
+        0;
+
+      gap: 30px;
+    }
+
+
+    .section-intro--compact {
+      padding:
+        48px
+        0;
+    }
+
+
+    .section-intro h2 {
+      white-space: nowrap;
+
+      font-size:
+        clamp(
+          2.6rem,
+          10.5vw,
+          3.6rem
+        );
+    }
+
+
+    /* HERO */
+
+    .hero {
+      padding:
+        22px
+        20px
+        25px;
+    }
+
+
+    .hero__top {
+      grid-template-columns:
+        1fr
+        auto;
+    }
+
+
+    .nav {
+      display: none;
+    }
+
+
+    .hero__image {
+      width: 100%;
+
+      -webkit-mask-image: none;
+
+      mask-image: none;
+    }
+
+
+    .hero__disciplines {
+      margin-top: 105px;
+    }
+
+
+    .hero h1 {
+      font-size:
+        clamp(
+          3.7rem,
+          17vw,
+          6rem
+        );
+    }
+
+
+    /* =====================================================
+       MOBILE PROJECTS
+    ====================================================== */
+
+    .project-scroll__sticky {
+      display: none;
+    }
+
+
+    .mobile-projects {
+      display: block;
+
+      padding:
+        28px
+        20px
+        65px;
+
+      background:
+        #291213;
+
+      color:
+        #f1ece6;
+    }
+
+
+    .mobile-projects__top {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      padding-bottom:
+        18px;
+
+      border-bottom:
+        1px solid
+        rgba(241, 236, 230, 0.16);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.5rem;
+
+      letter-spacing:
+        0.12em;
+
+      color:
+        rgba(241, 236, 230, 0.42);
+    }
+
+
+    .mobile-project {
+      padding:
+        42px
+        0
+        55px;
+
+      border-bottom:
+        1px solid
+        rgba(241, 236, 230, 0.15);
+    }
+
+
+    .mobile-project:last-child {
+      border-bottom: none;
+
+      padding-bottom: 0;
+    }
+
+
+    .mobile-project__meta {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 18px;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.5rem;
+
+      letter-spacing:
+        0.1em;
+
+      text-transform:
+        uppercase;
+
+      color:
+        rgba(241, 236, 230, 0.42);
+    }
+
+
+    .mobile-project h3 {
+      margin: 0;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      font-size:
+        clamp(
+          2rem,
+          9.8vw,
+          3rem
+        );
+
+      font-weight:
+        400;
+
+      line-height:
+        0.98;
+
+      letter-spacing:
+        -0.045em;
+    }
+
+
+    .mobile-project__disciplines {
+      margin:
+        13px
+        0
+        0;
+
+      max-width:
+        340px;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.57rem;
+
+      line-height:
+        1.55;
+
+      color:
+        rgba(241, 236, 230, 0.48);
+    }
+
+
+    .mobile-project__link {
+      display:
+        inline-block;
+
+      margin-top:
+        24px;
+
+      padding-bottom:
+        5px;
+
+      border-bottom:
+        1px solid
+        rgba(241, 236, 230, 0.35);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.52rem;
+
+      letter-spacing:
+        0.11em;
+
+      color:
+        #f1ece6;
+    }
+
+
+    .mobile-project__link--disabled {
+      border-bottom-color:
+        rgba(241, 236, 230, 0.18);
+
+      color:
+        rgba(241, 236, 230, 0.4);
+    }
+
+
+    .mobile-project__image {
+      position:
+        relative;
+
+      display:
+        block;
+
+      width:
+        100%;
+
+      aspect-ratio:
+        1.75 / 1;
+
+      margin-top:
+        28px;
+
+      overflow:
+        hidden;
+
+      background:
+        #1d0d0f;
+
+      border:
+        1px solid
+        rgba(241, 236, 230, 0.1);
+    }
+
+
+    .mobile-project__image img {
+      width:
+        100%;
+
+      height:
+        100%;
+
+      display:
+        block;
+
+      object-fit:
+        contain;
+
+      background:
+        #1d0d0f;
+    }
+
+
+    .mobile-project__image--disabled {
+      opacity:
+        0.55;
+    }
+
+
+    .mobile-project__image--disabled span {
+      position:
+        absolute;
+
+      top:
+        50%;
+
+      left:
+        50%;
+
+      transform:
+        translate(-50%, -50%);
+
+      padding:
+        8px
+        12px;
+
+      border:
+        1px solid
+        rgba(241, 236, 230, 0.35);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(41, 18, 19, 0.75);
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size:
+        0.48rem;
+
+      letter-spacing:
+        0.11em;
+
+      white-space:
+        nowrap;
+    }
+
+
+    /* ABOUT */
+
+    .about-story {
+      width: 100%;
+
+      padding-bottom: 75px;
+    }
+
+
+    .about-story h3 {
+      font-size:
+        clamp(
+          2.3rem,
+          10vw,
+          3.4rem
+        );
+    }
+
+
+    .about-story__text {
+      grid-template-columns:
+        1fr;
+
+      gap:
+        18px;
+    }
+
+
+    /* TABLES */
+
+    .aligned-table__header,
+    .career-table__header {
+      display: none;
+    }
+
+
+    .aligned-row,
+    .career-row {
+      min-height: auto;
+
+      padding:
+        24px
+        0;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr;
+
+      gap:
+        8px;
+    }
+
+
+    .aligned-row strong,
+    .career-row strong {
+      font-size:
+        1.65rem;
+    }
+
+
+    .aligned-table__header > *:nth-child(2),
+    .aligned-row > *:nth-child(2),
+    .career-table__header > *:nth-child(3),
+    .career-row > *:nth-child(3) {
+      transform:
+        none;
+    }
+
+
+    .education-block {
+      margin-top:
+        65px;
+    }
+
+
+    .education-block__label {
+      padding-left:
+        0;
+    }
+
+
+    /* CONTACT */
+
+    .contact {
+      padding-bottom:
+        24px;
+    }
+
+
+    .contact .section-intro {
+      min-height:
+        auto;
+    }
+
+
+    .contact-row {
+      min-height:
+        auto;
+
+      grid-template-columns:
+        1fr
+        auto;
+
+      gap:
+        10px
+        20px;
+
+      padding:
+        24px
+        0;
+    }
+
+
+    .contact-row__label {
+      grid-column:
+        1 / -1;
+    }
+
+
+    .contact-row__value {
+      font-size:
+        clamp(
+          1.35rem,
+          6vw,
+          1.8rem
+        );
+
+      overflow-wrap:
+        anywhere;
+    }
+
+
+    .contact-closing {
+      padding:
+        75px
+        0;
+    }
+
+
+    .contact-closing h3 {
+      font-size:
+        clamp(
+          3.2rem,
+          15vw,
+          5rem
+        );
+    }
+
+
+    .site-footer {
+      grid-template-columns:
+        1fr
+        1fr;
+    }
+
+
+    .site-footer a {
+      display:
+        none;
+    }
+
+  }
+
+</style>
